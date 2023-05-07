@@ -1,0 +1,135 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "vac.manager",
+      "version": "1.0"
+    },
+    "paths": {
+      "/api/iot/Room/{id}": {
+        "get": {
+          "tags": [
+            "Room"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/api/iot/Temperature/{id}": {
+        "get": {
+          "tags": [
+            "Temperature"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "startTime",
+              "in": "query",
+              "style": "form",
+              "schema": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            {
+              "name": "endTime",
+              "in": "query",
+              "style": "form",
+              "schema": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Temperature"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Climate"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Climate"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Climate"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Climate": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "nullable": true
+            },
+            "currentTemprature": {
+              "type": "number",
+              "format": "double"
+            },
+            "setTemperature": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
