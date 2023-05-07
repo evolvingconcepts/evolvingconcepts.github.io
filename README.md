@@ -2,7 +2,21 @@
 
 ## Api documentation
 
+### Overview
+
+![](/overview.png)
+
+
+We provide an IOT api with a single interface for each module that supports cross manufacture devices. This way there is no need to implenment every single api from multiple manufactures.
+All gateway trafic is handled over sockets, there is no port-forward, vpn requirements. A active internet connection is the only requirement. Without a active internet connection the functionality in the specific house still works due to the local gateway.
+
+
+
+
+
+
 Click here for full  [Api Dcoumentation](/api-docs) 
+
 
 ### Capabilities
 
