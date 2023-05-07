@@ -1,8 +1,97 @@
-# Evolvingconcepts documentation
 
 
 ## Api documentation
 
+Click here for full  [Api Dcoumentation](/api-docs) 
+
+### Capabilities
+
+Each gateway has capabilties (features activated)
+Based on the response it is posible to determin what function to use.
+
+&nbsp;
+
+Each gateway has default capabilties and each room can have separate capabilities. This way it is posible to see what devices are added to specific rooms and create your own logic based on this. 
 
 
-[Api Dcoumentation](/api-docs)
+
+```
+{
+  "id": "string",
+  "capabilities": {
+    "motionEnabled": true,
+    "thermostatEnabled": true,
+    "lightEnabled": true,
+    "smokeEnabled": true,
+    "energyEnabled": true
+  },
+  "rooms": [
+    {
+      "id": "string",
+      "name": "string",
+      "capabilities": {
+        "motionEnabled": true,
+        "thermostatEnabled": true,
+        "lightEnabled": true,
+        "smokeEnabled": true,
+        "energyEnabled": true
+      }
+    }
+  ]
+}
+```
+
+For more information see the openapi spec page linked in the top of this page
+
+
+
+## Client SDK
+
+### C#
+
+#### Initilization:
+
+```
+using EvolvingConcepts.Client;
+
+var client = new IotClient("mysecret");
+```
+
+Examples:
+
+Climate
+
+
+```
+//Get current climate
+var currentClimate = await client.GetClimate(result.Id);
+
+//set climate 
+await client.SetClimate(result.Id,new Climate { Mode = Climate.Modes.Heat, Temperature = 21 });
+
+//Set climate is specific room
+await client.SetClimate(result.Id,new Climate { Mode = Climate.Modes.Heat, Temperature = 21 },"bedroom1");
+```
+
+Events:
+
+It is posible to subscribe to specific events of specific iot devices, Each time an manual action on the device (Like a person activating a ac unit or setting a temperature from the location itself, turning on the light etc...) the event will contain the location and the room where it is triggered. 
+```
+await client.EnableEvents();
+
+client.ClimateChanged += (e,s) => 
+{
+
+};
+
+client.MotionChanged += ......
+
+```
+
+
+
+
+
+
+
+

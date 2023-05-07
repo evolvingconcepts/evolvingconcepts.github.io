@@ -1,135 +1,320 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-      "title": "vac.manager",
-      "version": "1.0"
-    },
-    "paths": {
-      "/api/iot/Room/{id}": {
-        "get": {
-          "tags": [
-            "Room"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string"
-              }
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EvolvingConcepts",
+    "version": "0.1"
+  },
+  "paths": {
+    "/api/iot/Climate/{id}": {
+      "get": {
+        "tags": [
+          "Climate"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       },
-      "/api/iot/Temperature/{id}": {
-        "get": {
-          "tags": [
-            "Temperature"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "startTime",
-              "in": "query",
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "format": "date-time"
-              }
-            },
-            {
-              "name": "endTime",
-              "in": "query",
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "format": "date-time"
-              }
+      "put": {
+        "tags": [
+          "Climate"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Climate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Climate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Climate"
+              }
             }
           }
         },
-        "put": {
-          "tags": [
-            "Temperature"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "style": "simple",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/iot/Climate/{id}/room/{room}": {
+      "get": {
+        "tags": [
+          "Climate"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "room",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Climate"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "room",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/Climate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Climate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Climate"
               }
             }
-          ],
-          "requestBody": {
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/iot/House/{id}": {
+      "get": {
+        "tags": [
+          "House"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
             "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HouseEntity"
+                }
+              },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Climate"
+                  "$ref": "#/components/schemas/HouseEntity"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Climate"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Climate"
+                  "$ref": "#/components/schemas/HouseEntity"
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Success"
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
             }
           }
         }
       }
-    },
-    "components": {
-      "schemas": {
-        "Climate": {
-          "type": "object",
-          "properties": {
-            "mode": {
-              "type": "string",
-              "nullable": true
-            },
-            "currentTemprature": {
-              "type": "number",
-              "format": "double"
-            },
-            "setTemperature": {
-              "type": "number",
-              "format": "double"
-            }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CapabilityEntity": {
+        "type": "object",
+        "properties": {
+          "motionEnabled": {
+            "type": "boolean"
           },
-          "additionalProperties": false
-        }
+          "thermostatEnabled": {
+            "type": "boolean"
+          },
+          "lightEnabled": {
+            "type": "boolean"
+          },
+          "smokeEnabled": {
+            "type": "boolean"
+          },
+          "energyEnabled": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Climate": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentTemprature": {
+            "type": "number",
+            "format": "double"
+          },
+          "setTemperature": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HouseEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "capabilities": {
+            "$ref": "#/components/schemas/CapabilityEntity"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomEntity"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "RoomEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "capabilities": {
+            "$ref": "#/components/schemas/CapabilityEntity"
+          }
+        },
+        "additionalProperties": false
       }
     }
   }
+}
